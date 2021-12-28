@@ -73,11 +73,42 @@ public class MainActivity extends AppCompatActivity {
         txtWarnPassword.setVisibility(View.GONE);
         txtWarnPassRepeat.setVisibility(View.GONE);
 
-        Snackbar.make(parent,"User Registered",Snackbar.LENGTH_INDEFINITE)
+        String name = edtTxtName.getText().toString();
+        String email = edtTxtEmail.getText().toString();
+        String country = countriesSpinner.getSelectedItem().toString();
+        String gender="";
+
+        switch(rgGender.getCheckedRadioButtonId()){
+            case R.id.rbMale:
+                gender="Male";
+                break;
+            case R.id.rbFemale:
+                gender = "Female";
+                break;
+            case R.id.rbOther:
+                gender = "Other";
+                break;
+            default:
+                gender="Unknown";
+                break;
+
+        }
+
+        String snackText="Name: "+name+"\n"+
+                "Email: "+email+"\n"+
+                "Country: "+country+"\n"+
+                "Gender: "+gender;
+
+        Log.d(TAG,"\nshowSnackBar: Snack Bar Text: \n"+snackText);
+
+        Snackbar.make(parent,snackText,Snackbar.LENGTH_INDEFINITE)
                 .setAction("Dismiss", new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-
+                        edtTxtName.setText("");
+                        edtTxtEmail.setText("");
+                        edtTxtPassword.setText("");
+                        edtTxtPassRepeat.setText("");
                     }
                 })
                 .show();
@@ -108,6 +139,12 @@ public class MainActivity extends AppCompatActivity {
         if(txtWarnPassRepeat.getText().toString().equals("")){
             txtWarnPassRepeat.setVisibility(View.VISIBLE);
             txtWarnPassRepeat.setText("Re-enter your password");
+            return false;
+        }
+
+        if(!edtTxtPassword.getText().toString().equals(edtTxtPassRepeat.getText().toString())){
+            txtWarnPassRepeat.setVisibility(View.VISIBLE);
+            txtWarnPassRepeat.setText("Password doesn't match");
             return false;
         }
 
