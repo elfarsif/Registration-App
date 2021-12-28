@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">RegistrationApp</string>
+    <array name="countries">
+        <item>Norway</item>
+        <item>India</item>
+        <item>Burma</item>
+        <item>Morocco</item>
+    </array>
 </resources>
